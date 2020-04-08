@@ -1,4 +1,4 @@
-// Package card provides data structures for the standard 52-card deck of French playing cards.
+// Package card models the standard 52-card deck of French playing cards.
 package card
 
 const (
