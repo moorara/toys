@@ -166,5 +166,5 @@ func (c Card) String() string {
 
 // Equals determines whether or not two cards are the same.
 func (c Card) Equals(rhs Card) bool {
-	return c.suit == rhs.suit && c.rank == c.rank
+	return c.suit == rhs.suit && c.rank == rhs.rank
 }
