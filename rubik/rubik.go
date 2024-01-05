@@ -1,6 +1,8 @@
 // Package rubik models the standard 3x3 Rubik's Cube.
 package rubik
 
+import "fmt"
+
 // Color represents one of the six colors in the standard 3x3 Rubik's Cube.
 type Color int
 
@@ -29,7 +31,7 @@ func (c Color) String() string {
 	case Red:
 		return "Red"
 	default:
-		return ""
+		return fmt.Sprintf("Color(%d)", c)
 	}
 }
 
@@ -56,38 +58,43 @@ type Cube interface {
 	Solved() bool
 }
 
-// corner cubelet
-//      +--------+
-//     /        /|
-//    /   3    / |
-//   /        /  |
-//  +--------+ 2 +
-//  |        |  /
-//  |   1    | /
-//  |        |/
-//  +--------+
+/*
+ Corner Cubelet:
 
-// edge cubelet
-//      +--------+
-//     //////////|
-//    ////////// |
-//   //////////  |
-//  +--------+ 2 +
-//  |        |  /
-//  |   1    | /
-//  |        |/
-//  +--------+
+      +---------+
+     /         /|
+    /    3    / |
+   /         /  |
+  +---------+ 2 +
+  |         |  /
+  |    1    | /
+  |         |/
+  +---------+
 
-// center cubelet
-//      +--------+
-//     //////////|
-//    ///////////|
-//   ////////////|
-//  +--------+///+
-//  |        |///
-//  |   1    |//
-//  |        |/
-//  +--------+
+ Edge Cubelet:
+
+      +---------+
+     ///////////|
+    /////////// |
+   ///////////  |
+  +---------+ 2 +
+  |         |  /
+  |    1    | /
+  |         |/
+  +---------+
+
+ Center Cubelet:
+
+      +---------+
+     ///////////|
+    ////////////|
+   /////////////|
+  +---------+///+
+  |         |///
+  |    1    |//
+  |         |/
+  +---------+
+*/
 
 // cube is the implementation of a standard 3x3 Rubik's Cube.
 type cube struct {

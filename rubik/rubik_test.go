@@ -14,6 +14,7 @@ func TestColor(t *testing.T) {
 		{"Green", Green, "Green"},
 		{"Orange", Orange, "Orange"},
 		{"Red", Red, "Red"},
+		{"Invalid", Color(6), "Color(6)"},
 	}
 
 	for _, tc := range tests {

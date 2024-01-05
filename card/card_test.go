@@ -12,7 +12,7 @@ func TestSuit(t *testing.T) {
 		{"Diamond", Diamond, "Diamond"},
 		{"Heart", Heart, "Heart"},
 		{"Spade", Spade, "Spade"},
-		{"Invalid", Suit(4), ""},
+		{"Invalid", Suit(4), "Suit(4)"},
 	}
 
 	for _, tc := range tests {
@@ -20,7 +20,7 @@ func TestSuit(t *testing.T) {
 			str := tc.suit.String()
 
 			if str != tc.expectedString {
-				t.Errorf("String: expected %s got %s", tc.expectedString, str)
+				t.Errorf("String(): expected %s got %s", tc.expectedString, str)
 			}
 		})
 	}
@@ -45,7 +45,7 @@ func TestRank(t *testing.T) {
 		{"Jack", Jack, "Jack"},
 		{"Queen", Queen, "Queen"},
 		{"King", King, "King"},
-		{"Invalid", Rank(13), ""},
+		{"Invalid", Rank(14), "Rank(14)"},
 	}
 
 	for _, tc := range tests {
@@ -53,7 +53,7 @@ func TestRank(t *testing.T) {
 			str := tc.rank.String()
 
 			if str != tc.expectedString {
-				t.Errorf("String: expected %s got %s", tc.expectedString, str)
+				t.Errorf("String(): expected %s got %s", tc.expectedString, str)
 			}
 		})
 	}
@@ -125,15 +125,19 @@ func TestCard(t *testing.T) {
 			card := New(tc.suit, tc.rank)
 
 			if s := card.Suit(); s != tc.suit {
-				t.Errorf("Suit: expected %s got %s", tc.suit, s)
+				t.Errorf("Suit(): expected %s got %s", tc.suit, s)
 			}
 
 			if r := card.Rank(); r != tc.rank {
-				t.Errorf("Rank: expected %s got %s", tc.rank, r)
+				t.Errorf("Rank(): expected %s got %s", tc.rank, r)
 			}
 
 			if s := card.String(); s != tc.expectedString {
-				t.Errorf("String: expected %s got %s", tc.expectedString, s)
+				t.Errorf("String(): expected %s got %s", tc.expectedString, s)
+			}
+
+			if clone := New(tc.suit, tc.rank); !card.Equals(clone) {
+				t.Error("Equals(): expected true got false")
 			}
 		})
 	}

@@ -1,10 +1,12 @@
 // Package card models the standard 52-card deck of French playing cards.
 package card
 
+import "fmt"
+
 const (
-	suitCount  = 4
-	rankCount  = 13
-	totalCount = 52
+	suitCount = 4
+	rankCount = 13
+	cardCount = 52
 )
 
 // Suit represents one of the four suit symbols in a deck of playing cards.
@@ -21,7 +23,7 @@ const (
 	Spade
 )
 
-// String Impelements fmt.Stringer
+// String Impelements the fmt.Stringer interface.
 func (s Suit) String() string {
 	switch s {
 	case Club:
@@ -33,7 +35,7 @@ func (s Suit) String() string {
 	case Spade:
 		return "Spade"
 	default:
-		return ""
+		return fmt.Sprintf("Suit(%d)", s)
 	}
 }
 
@@ -42,7 +44,7 @@ type Rank int
 
 // The thirteen ranks in each of the four suits.
 const (
-	Ace Rank = iota
+	Ace Rank = iota + 1
 	Two
 	Three
 	Four
@@ -57,7 +59,7 @@ const (
 	King
 )
 
-// String Impelements fmt.Stringer
+// String Impelements the fmt.Stringer interface.
 func (r Rank) String() string {
 	switch r {
 	case Ace:
@@ -87,7 +89,7 @@ func (r Rank) String() string {
 	case King:
 		return "King"
 	default:
-		return ""
+		return fmt.Sprintf("Rank(%d)", r)
 	}
 }
 
@@ -115,7 +117,7 @@ func (c Card) Rank() Rank {
 	return c.rank
 }
 
-// String Impelements fmt.Stringer
+// String Impelements the fmt.Stringer interface.
 func (c Card) String() string {
 	suit := ""
 	switch c.suit {
@@ -160,4 +162,9 @@ func (c Card) String() string {
 	}
 
 	return rank + suit
+}
+
+// Equals determines whether or not two cards are the same.
+func (c Card) Equals(rhs Card) bool {
+	return c.suit == rhs.suit && c.rank == rhs.rank
 }
