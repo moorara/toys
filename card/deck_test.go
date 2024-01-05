@@ -1,25 +1,31 @@
 package card
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 func TestDeck(t *testing.T) {
-	tests := []struct {
-		name string
-	}{
-		{"OK"},
+	deck := NewDeck()
+
+	if err := deck.verify(); err != nil {
+		t.Errorf("verify(): %s", err)
 	}
 
-	for _, tc := range tests {
-		t.Run(tc.name, func(t *testing.T) {
-			deck := NewDeck()
+	deck.Shuffle()
 
-			if l := len(deck.cards); l != totalCount {
-				t.Errorf("Deck Length: expected %d got %d", totalCount, l)
-			}
+	if err := deck.verify(); err != nil {
+		t.Errorf("verify(): %s", err)
+	}
 
-			if s := deck.String(); s == "" {
-				t.Error("String: got empty string")
+	str := deck.String()
+
+	for s := 0; s < suitCount; s++ {
+		for r := 1; r <= rankCount; r++ { // Card ranks start from 1 (Ace)
+			c := New(Suit(s), Rank(r))
+			if !strings.Contains(str, c.String()) {
+				t.Errorf("String(): card %s not found", c.String())
 			}
-		})
+		}
 	}
 }
