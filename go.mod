@@ -1,3 +1,3 @@
 module github.com/moorara/toys
 
-go 1.21
+go 1.22.2
